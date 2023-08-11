@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { fetchPixabay } from '../resources/fetchPixabay';
 import ImageGallery from './ImageGallery/ImageGallery';
+import Searchbar from './Searchbar/Searchbar';
+import css from './styles.module.css';
 
 export class App extends Component {
 
@@ -23,8 +25,8 @@ export class App extends Component {
   render() {
     const { images } = this.state;
     return (
-      <div className='App'>
-        <h2>Imagenes</h2>
+      <div className={css.App}>
+        <Searchbar />
         <ImageGallery images={images} />
       </div>
     );
