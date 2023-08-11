@@ -6,7 +6,6 @@ export class App extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       images: [],
     }
@@ -23,11 +22,8 @@ export class App extends Component {
   
   render() {
     const { images } = this.state;
-    //console.log("images: ", images);
-
     return (
-      <div>
-        React homework template
+      <div className='App'>
         <h2>Imagenes</h2>
         <ImageGallery images={images} />
       </div>
