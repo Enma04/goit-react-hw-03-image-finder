@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { fetchPixabay } from '../resources/fetchPixabay';
+import ImageGallery from './ImageGallery/ImageGallery';
 
 export class App extends Component {
 
@@ -22,12 +23,13 @@ export class App extends Component {
   
   render() {
     const { images } = this.state;
-    console.log("images: ", images);
+    //console.log("images: ", images);
 
     return (
       <div>
         React homework template
         <h2>Imagenes</h2>
+        <ImageGallery images={images} />
       </div>
     );
   }

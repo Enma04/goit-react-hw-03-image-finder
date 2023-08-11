@@ -1,12 +1,13 @@
 import React from 'react';
 
 export default class ImageGalleryItem extends React.Component {
-  state = {};
   render() {
-    return (
-      <li class="gallery-item">
-        <img src="" alt="" />
-      </li>
-    );
+    const { data } = this.props;
+
+    return data.map( item => (
+      (<li key={item.id} className="gallery-item">
+        <img src={item.webformatURL} alt={`Img-${item.id}`} />
+      </li>)
+    ));
   }
 }

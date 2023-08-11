@@ -1,8 +1,12 @@
 import React from 'react';
+import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 
 export default class ImageGallery extends React.Component {
-  state = {};
   render() {
-    return <ul class="gallery"></ul>;
+    return(
+      <ul className="gallery">
+        <ImageGalleryItem data={this.props.images} />
+      </ul>
+    );
   }
 }
