@@ -4,9 +4,10 @@ import css from '../styles.module.css';
 export default class Searchbar extends React.Component {
   state = {};
   render() {
+    const { handleSearch } = this.props;
     return (
       <header className={css.Searchbar}>
-        <form className={css.SearchForm}>
+        <form className={css.SearchForm} onSubmit={handleSearch}>
           <button type="submit" className={css.SearchFormButton}>
             <span className={css.SearchFormButtonLabel}>Search</span>
           </button>

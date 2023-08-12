@@ -4,9 +4,10 @@ import css from '../styles.module.css';
 
 export default class ImageGallery extends React.Component {
   render() {
+    const { images } = this.props;
     return(
       <ul className={css.ImageGallery}>
-        <ImageGalleryItem data={this.props.images} />
+        <ImageGalleryItem data={images} />
       </ul>
     );
   }

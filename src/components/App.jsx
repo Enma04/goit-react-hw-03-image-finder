@@ -10,23 +10,41 @@ export class App extends Component {
     super(props);
     this.state = {
       images: [],
+      search: '',
     }
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
+  //-------------------------------------------------
+  //------------ COMPONENTS
   async componentDidMount() {
-    //const data2 = fetchPixabayAxios().then((resp) => resp.data);
     const data = await fetchPixabay().then();
-    //const resp = data resp.then();
     this.setState(() => ({
       images: [...data.hits],
     }));
   }
+
+  componentDidUpdate() {
+    
+  }
+
+  //-------------------------------------------------
+  //------------ FUNCTIONS
+  handleSearch = (e) => {
+    e.preventDefault();
+    const value = e.target.childNodes[1].value;
+    this.setState({
+      search: value,
+    });
+  }
   
+  //-------------------------------------------------
+  //------------ RENDER
   render() {
     const { images } = this.state;
     return (
       <div className={css.App}>
-        <Searchbar />
+        <Searchbar handleSearch={this.handleSearch} />
         <ImageGallery images={images} />
       </div>
     );
