@@ -24,8 +24,12 @@ export class App extends Component {
     }));
   }
 
-  componentDidUpdate() {
-    
+  componentDidUpdate(prevSate) {
+    const { search } = this.state;
+    console.log("Cambio de estado!");
+    if(prevSate.search !== search) {
+
+    }
   }
 
   //-------------------------------------------------
@@ -36,6 +40,10 @@ export class App extends Component {
     this.setState({
       search: value,
     });
+  }
+
+  handleNewSearch = async (search) => {
+    return await fetchPixabay().then();
   }
   
   //-------------------------------------------------
