@@ -24,11 +24,14 @@ export class App extends Component {
     }));
   }
 
-  componentDidUpdate(prevSate) {
+  async componentDidUpdate(prevProps, prevSate) {
     const { search } = this.state;
-    console.log("Cambio de estado!");
-    if(prevSate.search !== search) {
 
+    if(prevSate.search !== search) {
+      const newData = await fetchPixabay(search).then();
+      this.setState(() => ({
+        images: [...newData.hits],
+      }));
     }
   }
 
@@ -41,18 +44,15 @@ export class App extends Component {
       search: value,
     });
   }
-
-  handleNewSearch = async (search) => {
-    return await fetchPixabay().then();
-  }
   
   //-------------------------------------------------
   //------------ RENDER
   render() {
     const { images } = this.state;
+    const { handleSearch } = this;
     return (
       <div className={css.App}>
-        <Searchbar handleSearch={this.handleSearch} />
+        <Searchbar handleSearch={handleSearch} />
         <ImageGallery images={images} />
       </div>
     );

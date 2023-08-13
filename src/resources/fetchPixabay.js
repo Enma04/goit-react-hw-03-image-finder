@@ -3,7 +3,7 @@ import axios from 'axios';
 const myKey = '38579369-eeb8272d66c6603b69812822b';
 const url = 'https://pixabay.com/api';
 
-export const fetchPixabay = async (search='cat', page=1) => {
+export const fetchPixabay = async (search='fish', page=1) => {
   //return await fetch(`https://pixabay.com/api/?q=dog&page=3&per_page=12&key=${myKey}&image_type=photo&orientation=horizontal`)
   const querty = `/?q=${search}`;
   const params = new URLSearchParams({
