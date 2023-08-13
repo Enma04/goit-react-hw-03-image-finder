@@ -4,7 +4,7 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import Searchbar from './Searchbar/Searchbar';
 import css from './styles.module.css';
 import Button from './Button/Button';
-import { Audio, Grid } from 'react-loader-spinner';
+import { Grid } from 'react-loader-spinner';
 
 export class App extends Component {
   constructor(props) {
