@@ -5,6 +5,7 @@ import Searchbar from './Searchbar/Searchbar';
 import css from './styles.module.css';
 import Button from './Button/Button';
 import { Grid } from 'react-loader-spinner';
+import Modal from './Modal/Modal';
 
 export class App extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ export class App extends Component {
       found: false,
     };
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleModal = this.handleModal.bind(this);
   }
 
   //-------------------------------------------------
@@ -30,6 +32,8 @@ export class App extends Component {
         images: [...newData.hits],
         page: 1,
         found: false,
+        modal: false,
+        largeURL: '',
       }));
     }
   }
@@ -55,17 +59,30 @@ export class App extends Component {
     }));
   };
 
+  handleModal = (e) => {
+    const { images } = this.state;
+    const imgID = e.target.attributes[0].value;
+    const image = images.find(item => item.id == imgID);
+
+    this.setState(() => ({
+      modal: true,
+      largeURL: image.largeImageURL,
+    }));
+  }
+
   //-------------------------------------------------
   //------------ RENDER
   render() {
-    const { images, found } = this.state;
-    const { handleSearch, handlePage } = this;
+    const { images, found, modal, largeURL } = this.state;
+    const { handleSearch, handlePage, handleModal } = this;
+
     return (
       <div className={css.App}>
         <Searchbar handleSearch={handleSearch} />
         { found && <Grid/> }
-        {images.length !== 0 && <ImageGallery images={images} />}
+        {images.length !== 0 && <ImageGallery handleModal={handleModal} images={images} />}
         {images.length !== 0 && <Button loadMore={handlePage} />}
+        {modal && <Modal url={largeURL} />}
       </div>
     );
   }

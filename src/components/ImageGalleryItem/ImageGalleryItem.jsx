@@ -6,7 +6,7 @@ export default class ImageGalleryItem extends React.Component {
     const { data } = this.props;
     return data.map( item => (
       (<li key={item.id} className={css.ImageGalleryItem}>
-        <img src={item.webformatURL} alt={`Img-${item.id}`} className={css.ImageGalleryItem} />
+        <img imgid={item.id} src={item.webformatURL} alt={`Img-${item.id}`} className={css.ImageGalleryItem} />
       </li>)
     ));
   }
