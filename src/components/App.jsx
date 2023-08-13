@@ -61,8 +61,8 @@ export class App extends Component {
 
   handleModal = (e) => {
     const { images } = this.state;
-    const imgID = e.target.attributes[0].value;
-    const image = images.find(item => item.id == imgID);
+    const imgID = JSON.parse(e.target.attributes[0].value);
+    const image = images.find(item => item.id === imgID);
 
     this.setState(() => ({
       modal: true,
@@ -70,11 +70,15 @@ export class App extends Component {
     }));
   }
 
+  closeModal = () => {
+    this.setState({modal: false});
+  }
+
   //-------------------------------------------------
   //------------ RENDER
   render() {
     const { images, found, modal, largeURL } = this.state;
-    const { handleSearch, handlePage, handleModal } = this;
+    const { handleSearch, handlePage, handleModal, closeModal } = this;
 
     return (
       <div className={css.App}>
@@ -82,7 +86,7 @@ export class App extends Component {
         { found && <Grid/> }
         {images.length !== 0 && <ImageGallery handleModal={handleModal} images={images} />}
         {images.length !== 0 && <Button loadMore={handlePage} />}
-        {modal && <Modal url={largeURL} />}
+        {modal && <Modal closeModal={closeModal} url={largeURL} />}
       </div>
     );
   }

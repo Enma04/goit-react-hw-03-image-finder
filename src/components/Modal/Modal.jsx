@@ -4,9 +4,9 @@ import css from '../styles.module.css';
 export default class Modal extends React.Component {
   render() {
     return(
-      <div className={css.Overlay} >
+      <div onClick={this.props.closeModal} className={css.Overlay} >
         <div className={css.Overlay}>
-          <img src={this.props.url} alt="Image" />
+          <img width="900px" src={this.props.url} alt="" />
         </div>
       </div>
     );
