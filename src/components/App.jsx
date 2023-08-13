@@ -6,14 +6,13 @@ import css from './styles.module.css';
 import Button from './Button/Button';
 
 export class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       images: [],
       search: '',
       page: 1,
-    }
+    };
     this.handleSearch = this.handleSearch.bind(this);
   }
 
@@ -21,28 +20,26 @@ export class App extends Component {
   //------------ COMPONENTS
 
   async componentDidUpdate(prevProps, prevSate) {
-    const { search, page } = this.state;
+    const { search } = this.state;
 
-    if(prevSate.search !== search) {
-      console.log("Estoy dentro de una nueva busqueda!");
+    if (prevSate.search !== search) {
       const newData = await fetchPixabay(search, 1).then();
       this.setState(() => ({
         images: [...newData.hits],
         page: 1,
       }));
     }
-
   }
 
   //-------------------------------------------------
   //------------ FUNCTIONS
-  handleSearch = (e) => {
+  handleSearch = e => {
     e.preventDefault();
     const value = e.target.childNodes[1].value;
     this.setState({
       search: value,
     });
-  }
+  };
 
   handlePage = async () => {
     const { search, page, images } = this.state;
@@ -52,8 +49,8 @@ export class App extends Component {
       page: page + 1,
       images: [...images, ...newData.hits],
     }));
-  }
-  
+  };
+
   //-------------------------------------------------
   //------------ RENDER
   render() {
@@ -63,9 +60,8 @@ export class App extends Component {
       <div className={css.App}>
         <Searchbar handleSearch={handleSearch} />
         <ImageGallery images={images} />
-        { images.length !== 0 && <Button loadMore={handlePage} /> }
+        {images.length !== 0 && <Button loadMore={handlePage} />}
       </div>
     );
   }
-
-};
+}
