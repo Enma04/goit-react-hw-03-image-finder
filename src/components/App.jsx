@@ -4,6 +4,7 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import Searchbar from './Searchbar/Searchbar';
 import css from './styles.module.css';
 import Button from './Button/Button';
+import { Audio, Grid } from 'react-loader-spinner';
 
 export class App extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export class App extends Component {
       images: [],
       search: '',
       page: 1,
+      found: false,
     };
     this.handleSearch = this.handleSearch.bind(this);
   }
@@ -27,6 +29,7 @@ export class App extends Component {
       this.setState(() => ({
         images: [...newData.hits],
         page: 1,
+        found: false,
       }));
     }
   }
@@ -38,6 +41,7 @@ export class App extends Component {
     const value = e.target.childNodes[1].value;
     this.setState({
       search: value,
+      found: true,
     });
   };
 
@@ -54,12 +58,13 @@ export class App extends Component {
   //-------------------------------------------------
   //------------ RENDER
   render() {
-    const { images } = this.state;
+    const { images, found } = this.state;
     const { handleSearch, handlePage } = this;
     return (
       <div className={css.App}>
         <Searchbar handleSearch={handleSearch} />
-        <ImageGallery images={images} />
+        { found && <Grid/> }
+        {images.length !== 0 && <ImageGallery images={images} />}
         {images.length !== 0 && <Button loadMore={handlePage} />}
       </div>
     );
